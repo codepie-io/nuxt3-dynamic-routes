@@ -63,7 +63,7 @@ Here, `posts/${route.params.id}` serves as a unique identifier to fetch the corr
   }
 ```
 
-## Run `nuxt generate`:
+Run `nuxt generate`:
 
 ```bash
 nuxt generate
