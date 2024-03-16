@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss'
   ],
+  experimental: {
+    sharedPrerenderData: true
+  },
   // devtools: { enabled: true }
   nitro: {
     debug: true,
@@ -10,14 +13,19 @@ export default defineNuxtConfig({
       async 'prerender:routes'(routes) {
         const allRoutes = [];
 
-        // Blogs pages routes | only required slug information
-        const blogPages = [{ id: 1 }, { id: 2 }, { id: 3 }]
-        // we can also make an api call to get the list of all blogs
-        if (blogPages) {
-          const genericRoutes = blogPages.map((x) => {
-            return `/posts/${x.id}`;
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+        const postPages = await response.json()
+
+        if (postPages) {
+          const postWithPayloadRoutes = postPages.map((x: { id: number }) => {
+            return `/posts-with-payload/${x.id}`
           })
-          allRoutes.push(...genericRoutes)
+
+          const postWithoutPayloadRoutes = postPages.map((x: { id: number }) => {
+            return `/posts-without-payload/${x.id}`
+          })
+
+          allRoutes.push(...postWithPayloadRoutes, ...postWithoutPayloadRoutes)
         }
 
         if (allRoutes.length) {

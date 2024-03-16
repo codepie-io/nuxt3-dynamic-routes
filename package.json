@@ -9,6 +9,15 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "keywords": [
+    "Nuxt.js",
+    "Nitro",
+    "prerender",
+    "dynamic routes",
+    "payloads",
+    "sharedPrerenderData",
+    "Nuxt 3"
+  ],
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.11.4",
     "nuxt": "^3.10.3",
